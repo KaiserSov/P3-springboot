@@ -1,4 +1,10 @@
 package com.sofka.demo.repository;
 
-public class IRoleJpaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import javax.management.relation.Role;
+import org.springframework.stereotype.Repository;
+
+public interface IRoleJpaRepository extends JpaRepository<Role,Long> {
+    Role findByName(String name);
 }
