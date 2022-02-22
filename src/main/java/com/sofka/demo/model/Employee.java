@@ -1,30 +1,24 @@
 package com.sofka.demo.model;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
 @Entity
+@Table(name = "Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 25,nullable = false)
+    @Column(length = 25, nullable = false)
     private String firstName;
 
-    @Column(length = 35,nullable = false)
+    @Column(length = 25, nullable = false)
     private String lastName;
 
-    @Column(length = 10,nullable = false, unique = true)
+    @Column(length = 10, nullable = false, unique = true)
     private String employeeid;
 
     @ManyToOne(optional = false)
@@ -37,48 +31,49 @@ public class Employee {
             inverseJoinColumns = { @JoinColumn(name = "project_id") })
     private List<Project> projects = new ArrayList<Project>();
 
-    //Constructor
-    public Employee(){
-
+    public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String employeeid){
+
+    public Employee(String firstName, String lastName, String employeeid, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeid = employeeid;
         this.role = role;
     }
 
-    //Getters and Setters
-    public Long getId(){
+    public static void remove(String id) {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName){
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getEmployeeid(){
+    public String getEmployeeid() {
         return employeeid;
     }
 
-    public void setEmployeeid(String employeeid){
+    public void setEmployeeid(String employeeid) {
         this.employeeid = employeeid;
     }
 
@@ -91,7 +86,7 @@ public class Employee {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -108,7 +103,7 @@ public class Employee {
 
 
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -122,11 +117,12 @@ public class Employee {
         } else if (!id.equals(other.id))
             return false;
         return true;
-        }
+    }
 
     @Override
-    public String toString(){
-        return "Employeed [employeedid = " + employeeid + ", firstname = " + firstName + ", id = " + id + ", lastName = " + lastName + "]";
+    public String toString() {
+        return "Employee [employeeid=" + employeeid + ", firstName=" + firstName + ", id=" + id + ", lastName="
+                + lastName + "]";
     }
 }
 
